@@ -94,15 +94,15 @@ In October 2025, with no court date in sight, I attempted to negotiate a settlem
 
 When I tried to formalise that agreement, however, I was presented with a compounding form containing no settlement amount. FRCS again refused to put the agreed figure into the form. I was therefore being asked to sign an admission without the document recording the financial limit we had negotiated.
 
-I wrote directly to the CEO of FRCS, asking him to honour the amount agreed at the meeting. Following that correspondence, I received a revised compounding form specifying FJ$10,000. It also introduced an additional condition: liability for import duty on *Lordship*.
+I wrote directly to the CEO of FRCS, requesting that FRCS honour the amount agreed at the meeting and commit to it by putting it in writing on the form. Following that correspondence, I received a revised compounding form specifying FJ$10,000. It also introduced an additional condition: liability for import duty on *Lordship*.
 
-I asked what that liability meant, how much I would have to pay and how the boat’s value would be calculated. FRCS refused to clarify those points and told me I had to sign the form. The proposed settlement now required me to accept FJ$10,000 plus an undisclosed amount of import duty.
+I asked what that liability meant, how much I would have to pay and how the boat’s value would be calculated. FRCS refused to clarify those points and told me I had to sign the form as is if I wished to settle. The proposed settlement now required me to accept FJ$10,000 plus an undisclosed amount of import duty.
 
 That left the total financial exposure unresolved. Although the negotiated amount had finally appeared in writing, the additional duty condition meant I still could not establish what signing would ultimately cost.
 
 I again involved the CEO, seeking removal of the import-duty condition. My objection was that section 155’s compounding procedure concerned settlement of the alleged Customs offence. I did not accept that resolving the last-port-clearance allegation should require me also to admit an unexplained liability for importing my boat.
 
-I had made a further attempt to settle, but the documents presented for signature did not give me the certainty I had sought: an agreed payment that would resolve the allegation without an additional, unquantified liability.
+I had made a further attempt to settle, but the documents presented for signature did not give me the certainty I had sought: an agreed payment that would resolve the allegation without an additional, unquantified liability. In the end I reverted back to proving my innocence in court.
 
 ## The trial
 
