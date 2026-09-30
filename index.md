@@ -60,7 +60,7 @@ When the Customs officer conducting the inward clearance asked for *Lordship’s
 
 Fiji Customs referred the matter for investigation. I was interviewed under caution on 11 October 2024.
 
-The allegation was that, as master of *Lordship*, I had contravened section 19(1)(d) of Fiji’s Customs Act by failing to furnish a last-port clearance when required to do so by a Customs officer. The eventual prosecution was brought under section 19(7).
+The allegation was that, as master of *Lordship*, I had contravened [section 19(1)(d) of Fiji’s Customs Act](https://frcs.org.fj/wp-content/uploads/2025/06/Customs-Act-1986-Revised-1st-August-2024.pdf#page=39) by failing to furnish a last-port clearance when required to do so by a Customs officer. The eventual prosecution was brought under [section 19(7)](https://frcs.org.fj/wp-content/uploads/2025/06/Customs-Act-1986-Revised-1st-August-2024.pdf#page=39).
 
 I did not dispute that I had arrived without physically possessing the Tongan clearance. My position was that I had originally left Tonga with valid clearance, but the document had subsequently been retained or cancelled by the Tongan authorities after I returned because of the forestay failure. It was therefore impossible for me to produce it in Fiji.
 
@@ -84,11 +84,9 @@ I maintained that I had committed no offence and declined to sign.
 
 ## The investor permit and import-duty issue
 
-In May 2025, while the Customs case remained unresolved, I obtained an investor permit. I wanted to be able to do something productive while staying in Fiji and avoid having to fly out and return every four to six months to renew my tourist status.
+In May 2025, while the Customs case remained unresolved, I obtained an investor permit. I wanted to be able to do something productive while staying in Fiji and avoid having to fly out of Fiji and back in every four to six months to renew my tourist status.
 
 That change in immigration status had implications for *Lordship*. The temporary import-duty concession for visiting yachts requires the owner to retain their status as a bona fide tourist. My move to an investor permit therefore raised a separate question about import duty on the boat. [FRCS conditions of temporary entry](https://www.frcs.org.fj/wp-content/uploads/2018/04/Joint-C2-C.-NEW.pdf)
-
-This was the background to FRCS’s subsequent attempt to include import-duty liability in the proposed settlement of the last-port-clearance allegation.
 
 ## Settlement negotiations in October 2025
 
@@ -209,6 +207,8 @@ When judgment was delivered, the magistrate made clear that this issue fell outs
 For me, the most useful lesson is the importance of keeping a clear record from the moment something goes wrong.
 
 Photographs of the damage, emails seeking repairs, correspondence with officials, the advance-arrival notification and the rigger’s evidence all helped establish what had happened and why I had acted as I did.
+
+A further lesson is not to assume that either your own government or the coastal state will provide practical assistance merely because you are a sailor in distress, or that the officials enforcing border and Customs rules will understand the seamanship and maritime law relevant to an emergency. I contacted the British mission in New Zealand and tried to contact the British High Commission in Suva. The response I received from New Zealand was, in substance, “Not our problem; if you want a lawyer, we can recommend one.” I was unable to establish contact with the High Commission in Suva: the published information gave me no usable means of doing so and stated that it did not accept visitors. International maritime law is not self-enforcing, and reciprocity between states offers little protection to the individual sailor standing before an official who may have no sailing experience and limited knowledge of the law being applied. I had assumed that a visiting country would assist a sailor in genuine distress just as my own government would assist one of its sailors, but my experience showed that this is not something on which a skipper can safely rely.
 
 Copies of clearance documents are particularly valuable. Immediately photograph every document you are given so that you have a record if the original becomes unavailable. If an official retains or cancels a document, ask for a written explanation and keep a record of when, where and by whom that was done.
 
