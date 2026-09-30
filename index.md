@@ -206,17 +206,23 @@ When judgment was delivered, the magistrate made clear that this issue fell outs
 
 ## Practical lessons for sailors
 
-For me, the most useful lesson is the importance of keeping a clear record from the moment something goes wrong.
+For me, the most useful lesson is the importance of keeping a clear record at all times when sailing.
+
+Copies of clearance documents are particularly valuable. Immediately photograph every document you are given so that you have a record if the original becomes unavailable.
 
 Photographs of the damage, emails seeking repairs, correspondence with officials, the advance-arrival notification and the rigger’s evidence all helped establish what had happened and why I had acted as I did.
 
-A further lesson is not to assume that either your own government or the coastal state will provide practical assistance merely because you are a sailor in distress, or that the officials enforcing border and Customs rules will understand the seamanship and maritime law relevant to an emergency. I contacted the British mission in New Zealand and tried to contact the British High Commission in Suva. The response I received from New Zealand was, in substance, “Not our problem; if you want a lawyer, we can recommend one.” I was unable to establish contact with the High Commission in Suva: the published information gave me no usable means of doing so and stated that it did not accept visitors. International maritime law is not self-enforcing, and reciprocity between states offers little protection to the individual sailor standing before an official who may have no sailing experience and limited knowledge of the law being applied. I had assumed that a visiting country would assist a sailor in genuine distress just as my own government would assist one of its sailors, but my experience showed that this is not something on which a skipper can safely rely.
-
-Copies of clearance documents are particularly valuable. Immediately photograph every document you are given so that you have a record if the original becomes unavailable. If an official retains or cancels a document, ask for a written explanation and keep a record of when, where and by whom that was done.
 
 The case also shows why the direction of a passage can matter as much as its length. A geographically closer destination may place a damaged yacht under greater strain. Explaining that distinction required evidence from someone with practical sailing and rigging expertise.
 
 My experience with compounding raises a separate point. Before signing an admission or settlement, understand what offence you are admitting, who will determine the payment, whether the amount is fixed in writing, what additional liabilities the document introduces and whether the resulting decision can be appealed. In my case, those questions remained unresolved despite repeated requests and a negotiated figure.
+
+A further lesson, which didn't really fit into the nature of this report, but nevertheless is an important lesson. I naively believed in two institutions:
+
+1) International (maritime) law - I believed that as a sailor, I would be protected by international law and states (Tonga & Fiji) would offer me assistance.
+2) The UK Government - After my first visit to customs in the Ha'apia group, I immediately contacted the British Embassy in New Zealand. A very well spoken and wonderfully empathetic British lady told me that she was very glad I and my vessel were safe, and there was, in essence, absolutely nothing the British Government would do to aid me in my plight.
+
+It's a mistake I won't make again.
 
 This judgment concerns the facts of *Lordship’s* voyage. It should not be treated as general permission to dispense with clearance requirements. My advance communication, prompt explanation on arrival and efforts to obtain assistance were all part of the evidence the Court considered.
 
