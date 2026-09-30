@@ -219,8 +219,9 @@ My experience with compounding raises a separate point. Before signing an admiss
 
 A further lesson, which didn't really fit into the nature of this report, but nevertheless is an important lesson. I naively believed in two institutions:
 
-1) International (maritime) law - I believed that as a sailor, I would be protected by international law and states (Tonga & Fiji) would offer me assistance.
-2) The UK Government - After my first visit to customs in the Ha'apia group, I immediately contacted the British Embassy in New Zealand. A very well spoken and wonderfully empathetic British lady told me that she was very glad I and my vessel were safe, and there was, in essence, absolutely nothing the British Government would do to aid me in my plight.
+1. **International maritime law** — I believed that as a sailor, I would be protected by international law and that states (Tonga and Fiji) would offer me assistance.
+
+2. **The UK Government** — After my first visit to Customs in the Haʻapai Group, I immediately contacted the British Embassy in New Zealand. A very well-spoken and wonderfully empathetic British lady told me that she was very glad that my vessel and I were safe, but that there was, in essence, absolutely nothing the British Government would do to aid me in my plight.
 
 It's a mistake I won't make again.
 
