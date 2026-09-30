@@ -1,0 +1,165 @@
+:root {
+  color-scheme: light dark;
+  --background: #f7f4ed;
+  --text: #23231f;
+  --muted: #6d6b62;
+  --accent: #255f85;
+  --rule: #d8d3c7;
+  --code-background: #ebe7dd;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #171714;
+    --text: #e9e5da;
+    --muted: #aaa69c;
+    --accent: #83bde3;
+    --rule: #3c3b35;
+    --code-background: #252520;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 18px;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+.article {
+  width: min(100% - 2rem, 42rem);
+  margin-inline: auto;
+  padding-block: clamp(3rem, 10vw, 7rem);
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+h1 {
+  margin: 0 0 0.65rem;
+  font-size: clamp(2.35rem, 8vw, 4.75rem);
+  letter-spacing: -0.04em;
+}
+
+h2 {
+  margin-top: 2.5em;
+  font-size: 1.55rem;
+  letter-spacing: -0.02em;
+}
+
+h3 {
+  margin-top: 2em;
+  font-size: 1.15rem;
+}
+
+p,
+ul,
+ol,
+blockquote,
+pre {
+  margin-block: 1.3rem;
+}
+
+p:first-of-type {
+  color: var(--muted);
+  font-size: 1.15rem;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.15em;
+}
+
+a:hover {
+  text-decoration-thickness: 0.14em;
+}
+
+a:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-block: 2rem;
+}
+
+blockquote {
+  margin-inline: 0;
+  padding-left: 1.25rem;
+  border-left: 3px solid var(--rule);
+  color: var(--muted);
+}
+
+hr {
+  margin-block: 3rem;
+  border: 0;
+  border-top: 1px solid var(--rule);
+}
+
+code,
+pre {
+  background: var(--code-background);
+  border-radius: 0.25rem;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.85em;
+}
+
+code {
+  padding: 0.12em 0.3em;
+}
+
+pre {
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 1rem;
+  line-height: 1.5;
+}
+
+pre code {
+  padding: 0;
+  background: none;
+}
+
+@media (max-width: 32rem) {
+  html {
+    font-size: 17px;
+  }
+
+  .article {
+    width: min(100% - 1.5rem, 42rem);
+  }
+}
+
+@media print {
+  :root {
+    --background: #fff;
+    --text: #000;
+    --muted: #444;
+    --accent: #000;
+  }
+
+  .article {
+    width: 100%;
+    padding: 0;
+  }
+}
+

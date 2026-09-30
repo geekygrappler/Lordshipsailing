@@ -1,0 +1,12 @@
+title: A Simple Article
+description: One article, presented clearly.
+url: "https://www.lordshipsailing.com"
+baseurl: ""
+
+# GitHub Pages builds this site with Jekyll automatically.
+markdown: kramdown
+permalink: pretty
+
+exclude:
+  - README.md
+  - LICENSE
