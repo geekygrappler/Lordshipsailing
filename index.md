@@ -192,6 +192,8 @@ The Court concluded that the prosecution had failed to prove the charge under se
 
 I was found not guilty and acquitted.
 
+[Read the full judgment](judgment/), transcribed from the signed 12-page court document.
+
 The Court accepted that *Lordship’s* structural damage was real, that the Tongan authorities had retained or cancelled the clearance following my return, and that my explanation of the emergency was supported by documents and independent technical evidence.
 
 The judgment advised the parties of a 28-day period in which to appeal.

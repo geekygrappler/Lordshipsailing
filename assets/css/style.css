@@ -102,6 +102,34 @@ img {
   margin-block: 2rem;
 }
 
+table {
+  width: 100%;
+  margin-block: 1.75rem;
+  border-collapse: collapse;
+  font-family: system-ui, sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+th,
+td {
+  padding: 0.65rem;
+  border: 1px solid var(--rule);
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: var(--code-background);
+}
+
+@media (max-width: 32rem) {
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
 blockquote {
   margin-inline: 0;
   padding-left: 1.25rem;
@@ -162,4 +190,3 @@ pre code {
     padding: 0;
   }
 }
-
