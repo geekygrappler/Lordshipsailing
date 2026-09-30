@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Your article title
-description: A short description of the article for search results and link previews.
+title: "Lordship: How a Rigging Emergency Became a Fiji Customs Prosecution"
+description: "How a damaged forestay, an emergency diversion to Fiji and a missing Tongan clearance led to a Customs prosecution—and an acquittal."
 ---
 
 # Lordship: How a Rigging Emergency Became a Fiji Customs Prosecution
