@@ -70,7 +70,7 @@ I also maintained that the voyage to Fiji had been undertaken in response to a m
 
 FRCS proposed resolving the allegation through a procedure called “compounding”. Under section 155 of Fiji’s Customs Act, this allows the Comptroller of Customs to settle an offence without a criminal trial. Before that power can be exercised, the person must admit in writing that they committed the offence and ask the Comptroller to deal with it.
 
-The Comptroller then determines the financial penalty. It can be as high as the maximum fine a court could impose following a conviction. Section 155 also states that the resulting order is final and cannot be appealed. An unpaid amount can be enforced through the courts. [Customs Act, section 155](https://laws.gov.fj/Acts/ViewSection/80960?query=ITC+Act+2012)
+The Comptroller then determines the financial penalty. It can be as high as the maximum fine a court could impose following a conviction. Section 155 also states that the resulting order is final and cannot be appealed. An unpaid amount can be enforced through the courts. [Customs Act, section 155](https://frcs.org.fj/wp-content/uploads/2025/06/Customs-Act-1986-Revised-1st-August-2024.pdf#page=141)
 
 For the offence alleged against me, the maximum fine was FJ$100,000. That was therefore also the statutory ceiling for a compounding penalty. [Customs Act, section 19(7)](https://frcs.org.fj/wp-content/uploads/2025/06/Customs-Act-1986-Revised-1st-August-2024.pdf#page=39)
 
