@@ -90,7 +90,7 @@ That change in immigration status had implications for *Lordship*. The temporary
 
 ## Settlement negotiations in October 2025
 
-In October 2025, I attempted to negotiate a settlement. At a meeting involving me, my lawyer and the FRCS team, we agreed on a reduced figure of FJ$10,000.
+In October 2025, with no court date in sight, I attempted to negotiate a settlement. At a meeting involving me, my lawyer and the FRCS team, we agreed on a reduced figure of FJ$10,000.
 
 When I tried to formalise that agreement, however, I was presented with a compounding form containing no settlement amount. FRCS again refused to put the agreed figure into the form. I was therefore being asked to sign an admission without the document recording the financial limit we had negotiated.
 
