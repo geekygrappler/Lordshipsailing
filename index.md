@@ -106,9 +106,13 @@ Under cross-examination, the officer who cleared *Lordship* into Fiji accepted t
 
 The investigating officer accepted that I did not physically possess the clearance and could not produce a document I did not have.
 
+He also accepted that he had no sailing experience. Although he said that he had been informed that repair facilities were available in Vavaʻu, no admissible independent evidence supporting that information was produced before the Court. The magistrate therefore gave limited weight to his view that I could simply have sailed there and noted that he had no comparable expertise with which to contradict the evidence about the danger of an upwind passage. [Judgment, paragraphs 16, 30 and 36](/judgment/#maritime-emergency)
+
 Sam Price had approximately 18 years’ experience repairing yacht masts and standing rigging and had participated in 18 Sydney-to-Hobart yacht races. He had inspected and repaired *Lordship’s* forestay. He described the damage as structural: a complete failure could bring down the mast, damage the hull and potentially sink the vessel. The forestay needed replacement using specialist equipment, including a hydraulic press.
 
 His evidence also addressed the choice of destination. He explained that an upwind passage placed greater stress on the damaged rigging and that travelling downwind towards Fiji was the safer course. The Court accepted him as a reliable witness on these technical matters. [Judgment, paragraphs 30 and 36–37](/judgment/#maritime-emergency)
+
+The judgment’s account of the defence submissions also records that both prosecution witnesses accepted in cross-examination that Fiji was obliged to afford safe passage to vessels in distress. It records separately that the inward-clearance officer agreed that failing to afford *Lordship* safe harbour was contrary to Fiji’s obligations under SOLAS. The Court ultimately treated UNCLOS and SOLAS as relevant context for assessing the emergency and the reasonableness of my actions, rather than as creating an automatic exemption from Fiji’s Customs requirements. [Judgment, paragraphs 26 and 32–33](/judgment/#unclos)
 
 After the hearings, the prosecution filed its closing submissions on 25 June 2026 and the defence on 7 September 2026.
 
