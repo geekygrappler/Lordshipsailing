@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#f4f1e9">
+    <title>Writer · Lordship</title>
+    <link rel="stylesheet" href="/assets/css/editor.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Back to Lordship">
+        <span class="brand-mark" aria-hidden="true">L</span>
+        <span>Lordship</span>
+      </a>
+
+      <div class="topbar-actions">
+        <span class="save-state" id="save-state" role="status">Saved locally</span>
+        <button class="button button-quiet" id="new-post" type="button">New</button>
+        <label class="button button-quiet" for="file-input">Open .md</label>
+        <input id="file-input" type="file" accept=".md,.markdown,text/markdown,text/plain" hidden>
+        <button class="button button-primary" id="download" type="button">Download Markdown</button>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <section class="editor-pane" aria-label="Post editor">
+        <div class="post-details">
+          <label class="field-label" for="post-title">Post title</label>
+          <input
+            class="title-input"
+            id="post-title"
+            type="text"
+            placeholder="A clear, memorable title"
+            autocomplete="off"
+            spellcheck="true"
+          >
+
+          <div class="meta-grid">
+            <div>
+              <label class="field-label" for="post-description">Description</label>
+              <input
+                class="meta-input"
+                id="post-description"
+                type="text"
+                placeholder="A short summary for search and sharing"
+                spellcheck="true"
+              >
+            </div>
+            <div>
+              <label class="field-label" for="post-slug">URL slug</label>
+              <input class="meta-input slug-input" id="post-slug" type="text" placeholder="my-post-title" autocomplete="off">
+            </div>
+          </div>
+        </div>
+
+        <div class="toolbar" role="toolbar" aria-label="Markdown formatting">
+          <button type="button" data-prefix="## " title="Heading 2">H2</button>
+          <button type="button" data-prefix="### " title="Heading 3">H3</button>
+          <span class="toolbar-rule" aria-hidden="true"></span>
+          <button type="button" data-wrap="**" title="Bold (Command+B)"><strong>B</strong></button>
+          <button type="button" data-wrap="*" title="Italic (Command+I)"><em>I</em></button>
+          <button type="button" data-link title="Link (Command+K)">Link</button>
+          <span class="toolbar-rule" aria-hidden="true"></span>
+          <button type="button" data-prefix="- " title="Bulleted list">• List</button>
+          <button type="button" data-prefix="1. " title="Numbered list">1. List</button>
+          <button type="button" data-prefix="> " title="Quote">Quote</button>
+          <button type="button" data-prefix="---\n" title="Divider">—</button>
+        </div>
+
+        <label class="sr-only" for="post-body">Post body in Markdown</label>
+        <textarea
+          class="body-input"
+          id="post-body"
+          placeholder="Start writing…\n\nUse ## for a heading, - for bullets, or 1. for a numbered list."
+          spellcheck="true"
+          autocapitalize="sentences"
+        ></textarea>
+
+        <footer class="editor-footer">
+          <span id="word-count">0 words</span>
+          <span>Markdown</span>
+          <button class="text-button" id="copy-markdown" type="button">Copy Markdown</button>
+        </footer>
+      </section>
+
+      <aside class="preview-pane" aria-label="Post preview">
+        <div class="preview-header">
+          <span>Preview</span>
+          <span class="preview-hint">Updates as you type</span>
+        </div>
+        <article class="preview article" id="preview">
+          <p class="empty-preview">Your formatted post will appear here.</p>
+        </article>
+      </aside>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="/assets/js/editor.js" defer></script>
+  </body>
+</html>

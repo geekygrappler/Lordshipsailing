@@ -21,6 +21,12 @@ Edit [`index.md`](index.md). The lines between `---` markers configure the brows
 
 The page supports standard Markdown, including headings, links, lists, quotes, images, and code blocks. Put local images in `assets/images/`.
 
+### Browser editor
+
+Open `/admin/` on the published site for a distraction-free Markdown editor. It includes browser spellcheck, formatting buttons, automatic list continuation, live preview, local draft autosave, Markdown import, and Jekyll-ready Markdown export.
+
+Drafts are stored only in the current browser. To publish a downloaded post, add the `.md` file to the repository (use `_posts/` for dated Jekyll posts, or replace `index.md` for the home-page article) and push it to `main`.
+
 ## Customize it
 
 - Change the site name and description in `_config.yml`.
@@ -28,4 +34,3 @@ The page supports standard Markdown, including headings, links, lists, quotes, i
 - For a user or organization site named `YOUR-USERNAME.github.io`, the same setup works at the root URL.
 
 No local build tools are required. GitHub Pages uses its built-in Jekyll builder.
-
