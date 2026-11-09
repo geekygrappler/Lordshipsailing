@@ -19,12 +19,14 @@ I sloped into the anchorage in the north of the Ha'apia group towards the end of
 ## The Nightmare Begins
 On Monday I borrowed a folding bike and cycled 13km from the anchorage to the customs office located in the main town of Pangai. I presented my, somewhat perspiring, self to the customs officer and explained the situation. As she examined my exit papers and my passport exit stamp, her brow furrowed in consternation. Eventually she figured it out, her red pen came out, she'd caught me red handed. The red pen crossed out my exit stamp, CANCELLED, the same treatment was given to my clearance papers. 
 > You've over stayed your visa!
+
 For indeed my visa did expire on the 28th of September, two days after I cleared out of the country and left, but as the customs officers don't see fit to work at the weekend, it was now September the 30th.
 
 I was somewhat taken aback, but not completely, I'd checked in and out of 20+ countries, so I knew that sometimes customs officers can get a little carried away with the authority they perceive to be invested in them by the highest of powers, God. I tried politely explaining to her that even though today was the 30th, and I was still in Tonga, I was here because I had a life threatening emergency at sea and had to return for safety. It was to no avail. She informed me that I must now go back to Vava'u where I would have to pay a fine of $1,000TOP ($450USD). Then I would be free to repair my boat and check out again. I will confess I was quite indignant at this turn of events, however I remained calm and polite. I calmly and politely took my passport out of her hand when she told me that she would keep it until I was ready to depart for Vava'u. 
 
 As soon as I left the office I contacted the British foreign office. 
 > Put me through to the Embassy old chap, I'm in a spot of bother in Tonga.
+
 I was put through to the New Zealand consulate. The proceeding conversation left me even more indignant. I expect the Tongan custom officials not to be predisposed to helping a British sailor out, but to get the same treatment from one's own government, really heaps ignominy upon indignity. The line from the customer support agent at Her Majesties Government was that the British Embassy would in no way be willing to render any assistance in this matter, they would be happy to email me a list of lawyers in Tonga if that was of any consolation. It wasn't.
 
 Once I made it back to the anchorage and debriefed my friends, a war counsel was formed over sun downers. Who had contacts in the Tongan Government, was it worth contacting the UK embassy again? In the end a connection in the Tongan Tourism department was emailed. The Tongan High Commission in the UK was emailed. A budding yachting agent in Vava'u was enlisted to visit the customs team there to plead my case. Tongan Customs at the HQ were phoned numerous times over the following days. All of it was for naught. 
@@ -42,6 +44,7 @@ After this we got down to brass tacks, where were my exit papers? He had not rea
 
 That afternoon they summoned me back to the office. The customs officer told me that I needed to pay the biosecurity fee, an unexplained (but unquestioned) overtime fee for customs, and that it needed to be paid in cash and it needed to be paid within the hour, they were shutting early for Fiji's independence day the following day. I was elated, I ran around Denarau like a headless chicken. Of course my cards didn't work for withdrawing money at any of the ATMs near by. In the end I had to go to a western union to get money. I came back with 10 minutes to spare, handed over the money, got my immigration stamp, got my biosecurity certificate. The customs officer puffed up his chest and said:
 > Mr. Brown, I will not be clearing your vessel into Fiji, I have referred you for investigation.
+
 I didn't even demand my cigarettes back.
 
 ## Interview under Caution
@@ -53,6 +56,7 @@ The interview was not at all combative. The officer simply asked me to repeat th
 
 This is where it gets interesting. After the interview was done, I had checked it and signed it, I asked the investigating officer 'off the record': what would happen next? He said it was up to his bosses to decide if they would charge me. I asked if that happened, what would be the consequences. He told me that similar cases lead to fines of $12,000FJD ($5,500USD). The original customs officer, sat at his desk next to us, couldn't believe it, he asked the investigating officer:
 > Sēchi*, did you say $12,000?
+
 The investigating officer angrily shushed him. I told the investigating officer that I hoped his bosses could see that in these circumstances I was simply trying to do what was safest for my boat, and that I hoped they'd decide not to charge me.
 
 * Get out of here! Strong negation/disbelief. (find source)
@@ -70,6 +74,7 @@ His response was simple:
 
 I was astounded, $12,000FJD in cash? It was mind boggling. I told him that there was no physical way for me to even obtain $12,000FJD in cash today. He smiled and said:
 > That's OK sir, I have a card machine in my car that you can use.
+
 ## Fighting the charges
 I had 14 days to answer the charge. The way that Fiji Customs laws are written, the offence I committed, not presenting last port clearance papers when requested, fell under the same set of offences for drug smuggling, arms & human trafficking, and the punishment scale was the same for all of them, up to 12 years in prison and/or a fine no larger than $100,000FJD. This fact was used on numerous occasions by the investigating officer to imply that the $12,000FJD fine was, in their view, a lenient penalty for what I had done. My options at this point were to admit in writing that I was guilty of the offence and to ask for the Comptroller of customs (CEO of Fiji Revenue & Customs) to compound the offence, which means to assess my case and mitigating circumstances, and to assign a fine amount. After that was paid, the offence would be removed and I would be allowed into the country. The other option was to contest the charge in Fiji's legal courts. 
 
@@ -79,6 +84,7 @@ I spent a lot of time on my boat thinking about what I could do. The advice from
 
 On the day before decision day, I received a call from a local lawyer, who had been advised of my plight. She was what might be described in antiquated parlance, a real pitbull of a lawyer. Her advice summed up to:
 > They're corrupt. That's corruption. We're going to get them on that. Don't give them a cent.
+
 She also offered to do the case pro bono, so I thought why not, she isn't wrong, let's win in court.
 ## Two Years Later 
 There were many amusing and bizarre occurrences over the following two years during which I settled in Suva, the capital of Fiji. I occupied my time by starting a Brazilian Jiu-jitsu and Mixed Martial Arts school, and by building a 11 foot plywood stitch and glue dinghy.
@@ -98,6 +104,7 @@ Even more pleasing when he started arguing with the Magistrate about how he shou
 
 In the end I was acquitted. The case that we presented, and the judgement, rested mostly upon the wording of Fijian Customs law which states:
 > the master of the vessel must present, when requested, the outward clearance from the last port, _if any_, to the customs officer.
+
 The phrase, if any, my lawyer argued, indicated that the law allowed for certain circumstances when customs clearance my not be available lawfully. The magistrate agreed and acquitted me. The nature of damage to my vessel, the necessity of me to get it repaired, were contributing factors. Which means the judgement doesn't allow you to arrive in Fiji without clearance papers under normal circumstances.
 
 After I was acquitted, I felt a surge of relief. It was, however, tempered with a practical understanding that while my position had improved, I was not 'in the clear'. Fijian customs appear from the outside to be corrupt. They have their own way of working, and my boat was still here without proper paperwork. I needed some cooperation from Customs to allow me to either check the boat into the country, or get the boat ready for off shore sailing (it has been held unused for 23 months), and leave without checking in. At the time of writing this article Customs are not being cooperative and have mounted various bureaucratic obstacles to getting the boat ready to depart, or for checking the boat into the country. I was not surprised by this and am doing all I possibly can under the restrictions they've imposed to prepare the boat to leave.
