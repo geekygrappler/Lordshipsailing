@@ -6,7 +6,7 @@
     <meta name="color-scheme" content="light">
     <meta name="robots" content="noindex, nofollow">
     <meta name="theme-color" content="#f4f1e9">
-    <title>Writer · Lordship</title>
+    <title>Articles · Lordship</title>
     <link rel="stylesheet" href="/assets/css/editor.css">
   </head>
   <body>
@@ -17,18 +17,61 @@
       </a>
 
       <div class="topbar-actions">
-        <span class="save-state" id="save-state" role="status">Saved locally</span>
-        <button class="button button-quiet" id="new-post" type="button">New</button>
-        <label class="button button-quiet" for="file-input">Open .md</label>
+        <span class="save-state" id="save-state" role="status">Saved on this computer</span>
+        <button class="button button-quiet editor-only" id="show-dashboard" type="button">All articles</button>
+        <label class="button button-quiet dashboard-only" for="file-input">Import .md</label>
         <input id="file-input" type="file" accept=".md,.markdown,text/markdown,text/plain" hidden>
-        <button class="button button-primary" id="download" type="button">Download Markdown</button>
+        <button class="button button-primary" id="new-post" type="button">New article</button>
       </div>
     </header>
 
-    <main class="workspace">
-      <section class="editor-pane" aria-label="Post editor">
+    <main class="dashboard" id="dashboard-view">
+      <section class="dashboard-heading">
+        <div>
+          <p class="eyebrow">Writing desk</p>
+          <h1>Articles</h1>
+          <p class="dashboard-intro">Drafts are kept in this browser. Published articles are part of the Lordship website.</p>
+        </div>
+        <div class="stats" aria-label="Article totals">
+          <div><strong id="draft-count">0</strong><span>Drafts</span></div>
+          <div><strong id="published-count">0</strong><span>Published</span></div>
+        </div>
+      </section>
+
+      <section class="article-library" aria-labelledby="library-heading">
+        <div class="library-toolbar">
+          <h2 id="library-heading">Your writing</h2>
+          <div class="filters" role="group" aria-label="Filter articles">
+            <button class="filter active" type="button" data-filter="all">All</button>
+            <button class="filter" type="button" data-filter="draft">Drafts</button>
+            <button class="filter" type="button" data-filter="published">Published</button>
+          </div>
+        </div>
+        <div class="article-list" id="article-list"></div>
+        <p class="empty-library" id="empty-library" hidden>No articles here yet.</p>
+      </section>
+
+      <aside class="storage-note">
+        <strong>No database required.</strong>
+        <span>Drafts and dashboard details are stored only in this browser on this computer. Export important drafts as Markdown for a separate backup.</span>
+      </aside>
+    </main>
+
+    <main class="workspace" id="editor-view" hidden>
+      <section class="editor-pane" aria-label="Article editor">
         <div class="post-details">
-          <label class="field-label" for="post-title">Post title</label>
+          <div class="status-row">
+            <div>
+              <label class="field-label" for="post-status">Status</label>
+              <select class="status-select" id="post-status">
+                <option value="draft">Draft</option>
+                <option value="published">Published</option>
+              </select>
+            </div>
+            <a class="live-link" id="live-link" href="#" target="_blank" rel="noopener" hidden>View live article ↗</a>
+          </div>
+
+          <label class="field-label" for="post-title">Article title</label>
           <input
             class="title-input"
             id="post-title"
@@ -51,7 +94,7 @@
             </div>
             <div>
               <label class="field-label" for="post-slug">URL slug</label>
-              <input class="meta-input slug-input" id="post-slug" type="text" placeholder="my-post-title" autocomplete="off">
+              <input class="meta-input slug-input" id="post-slug" type="text" placeholder="my-article-title" autocomplete="off">
             </div>
           </div>
         </div>
@@ -66,15 +109,15 @@
           <span class="toolbar-rule" aria-hidden="true"></span>
           <button type="button" data-prefix="- " title="Bulleted list">• List</button>
           <button type="button" data-prefix="1. " title="Numbered list">1. List</button>
-          <button type="button" data-prefix="> " title="Quote">Quote</button>
-          <button type="button" data-prefix="---\n" title="Divider">—</button>
+          <button type="button" data-prefix="&gt; " title="Quote">Quote</button>
+          <button type="button" data-prefix="---&#10;" title="Divider">—</button>
         </div>
 
-        <label class="sr-only" for="post-body">Post body in Markdown</label>
+        <label class="sr-only" for="post-body">Article body in Markdown</label>
         <textarea
           class="body-input"
           id="post-body"
-          placeholder="Start writing…\n\nUse ## for a heading, - for bullets, or 1. for a numbered list."
+          placeholder="Start writing…&#10;&#10;Use ## for a heading, - for bullets, or 1. for a numbered list."
           spellcheck="true"
           autocapitalize="sentences"
         ></textarea>
@@ -82,17 +125,19 @@
         <footer class="editor-footer">
           <span id="word-count">0 words</span>
           <span>Markdown</span>
-          <button class="text-button" id="copy-markdown" type="button">Copy Markdown</button>
+          <button class="text-button danger-button" id="delete-post" type="button">Delete draft</button>
+          <button class="text-button" id="copy-markdown" type="button">Copy</button>
+          <button class="text-button" id="download" type="button">Export Markdown</button>
         </footer>
       </section>
 
-      <aside class="preview-pane" aria-label="Post preview">
+      <aside class="preview-pane" aria-label="Article preview">
         <div class="preview-header">
           <span>Preview</span>
           <span class="preview-hint">Updates as you type</span>
         </div>
         <article class="preview article" id="preview">
-          <p class="empty-preview">Your formatted post will appear here.</p>
+          <p class="empty-preview">Your formatted article will appear here.</p>
         </article>
       </aside>
     </main>

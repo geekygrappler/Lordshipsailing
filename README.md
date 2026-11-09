@@ -1,6 +1,6 @@
-# Simple GitHub Pages article
+# Lordship articles
 
-A tiny, responsive site for publishing one Markdown article with GitHub Pages.
+A small, responsive collection of Markdown articles published with GitHub Pages.
 
 ## Publish it
 
@@ -15,17 +15,17 @@ GitHub will publish the site and rebuild it after every push to `main`. The firs
 https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/
 ```
 
-## Write the article
+## Write articles
 
-Edit [`index.md`](index.md). The lines between `---` markers configure the browser title and search description; the content below them is the article.
+The home-page article lives in [`index.md`](index.md). Other published articles live in [`_posts/`](_posts/). The lines between `---` markers configure the browser title and search description; the content below them is the article.
 
 The page supports standard Markdown, including headings, links, lists, quotes, images, and code blocks. Put local images in `assets/images/`.
 
 ### Browser editor
 
-Open `/admin/` on the published site for a distraction-free Markdown editor. It includes browser spellcheck, formatting buttons, automatic list continuation, live preview, local draft autosave, Markdown import, and Jekyll-ready Markdown export.
+Open `/admin/` on the published site for the article dashboard and distraction-free Markdown editor. It supports multiple drafts, draft/published filters, browser spellcheck, formatting buttons, automatic list continuation, live preview, Markdown import, and Jekyll-ready Markdown export.
 
-Drafts are stored only in the current browser. To publish a downloaded post, add the `.md` file to the repository (use `_posts/` for dated Jekyll posts, or replace `index.md` for the home-page article) and push it to `main`.
+Drafts and dashboard metadata are stored only in the current browser on this computer—there is no hosted database. Export important drafts as a backup. To publish an exported post, add the `.md` file to `_posts/` and push it to `main`.
 
 ## Customize it
 

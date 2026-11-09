@@ -43,6 +43,24 @@ body {
   padding-block: clamp(3rem, 10vw, 7rem);
 }
 
+.site-nav {
+  width: min(100% - 2rem, 48rem);
+  margin: 0 auto;
+  padding-top: 1.5rem;
+  font-family: system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 650;
+}
+
+.site-nav a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.site-nav + .article {
+  padding-top: clamp(2.5rem, 7vw, 5rem);
+}
+
 h1,
 h2,
 h3 {
@@ -165,6 +183,38 @@ pre {
 pre code {
   padding: 0;
   background: none;
+}
+
+.article-footer {
+  width: min(100% - 2rem, 42rem);
+  margin: 0 auto;
+  padding: 2.5rem 0 clamp(4rem, 10vw, 7rem);
+  border-top: 1px solid var(--rule);
+}
+
+.article-footer .footer-kicker {
+  margin: 0 0 0.35rem;
+  color: var(--muted);
+  font-family: system-ui, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.article-footer h2 {
+  margin: 0;
+  font-size: 1.55rem;
+}
+
+.article-footer ul {
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.article-footer li + li {
+  margin-top: 0.65rem;
 }
 
 @media (max-width: 32rem) {
