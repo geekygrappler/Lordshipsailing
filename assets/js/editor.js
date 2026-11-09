@@ -3,6 +3,7 @@
 
   const STORAGE_KEY = "lordship-articles-v1";
   const LEGACY_KEY = "lordship-editor-draft-v1";
+  const QUOTE_FIX_KEY = "lordship-neverending-quote-fix-v1";
   const PUBLISHED_ARTICLES = [
     {
       id: "published-customs-case",
@@ -244,6 +245,15 @@
       }
     } catch (error) {
       // Leave an unreadable legacy value untouched so it can still be recovered manually.
+    }
+
+    if (!localStorage.getItem(QUOTE_FIX_KEY)) {
+      const journey = articles.find((article) => article.id === "published-neverending-journey");
+      if (journey?.body) {
+        journey.body = journey.body.replace(/^(> [^\n]+)\n(?!\n|>)/gm, "$1\n\n");
+        journey.updatedAt = new Date().toISOString();
+      }
+      localStorage.setItem(QUOTE_FIX_KEY, "complete");
     }
 
     saveArticles();
