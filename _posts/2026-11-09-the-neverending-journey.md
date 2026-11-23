@@ -2,6 +2,7 @@
 layout: default
 title: "The neverending journey"
 description: ""
+permalink: /the-neverending-journey/
 ---
 
 # The neverending journey
