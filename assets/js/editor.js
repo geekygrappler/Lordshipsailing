@@ -4,6 +4,7 @@
   const STORAGE_KEY = "lordship-articles-v1";
   const LEGACY_KEY = "lordship-editor-draft-v1";
   const QUOTE_FIX_KEY = "lordship-neverending-quote-fix-v1";
+  const SECHI_SUPERSCRIPT_FIX_KEY = "lordship-neverending-sechi-superscript-fix-v2";
   const PUBLISHED_DATA_URL = "/admin/published.json";
   const GITHUB_REPOSITORY = "geekygrappler/Lordshipsailing";
   const GITHUB_BRANCH = "main";
@@ -79,6 +80,30 @@
 
   function newId() {
     return window.crypto?.randomUUID?.() || `article-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+  }
+
+  function editorSuperscriptSyntax(value) {
+    return String(value || "").replace(
+      /<sup>\s*\^?\\?\*\^?\s*<\/sup>/gi,
+      "^*^"
+    );
+  }
+
+  function publishedSuperscriptSyntax(value) {
+    return String(value || "").replace(/\^\\?\*\^/g, "<sup>*</sup>");
+  }
+
+  function normalizeSechiNote(value) {
+    return editorSuperscriptSyntax(value)
+      .replace(/Sēchi(?:\^\\?\*\^|\*)\s*,/g, "Sēchi^*^,")
+      .replace(
+        /(The investigating officer angrily shushed him\.)\s*(?:\^\\?\*\^|\\?\*)\s*(?=Get out of here!)/i,
+        "$1\n\n^*^ "
+      )
+      .replace(
+        /^(\^\*\^\s*Get out of here![^\n]*)(?!\n\{:\s+\.article-note\})/m,
+        "$1\n{: .article-note}"
+      );
   }
 
 
@@ -158,6 +183,15 @@
       localStorage.setItem(QUOTE_FIX_KEY, "complete");
     }
 
+    if (!localStorage.getItem(SECHI_SUPERSCRIPT_FIX_KEY)) {
+      const journey = articles.find((article) => article.slug === "the-neverending-journey");
+      if (journey?.body) {
+        journey.body = normalizeSechiNote(journey.body);
+        journey.updatedAt = new Date().toISOString();
+      }
+      localStorage.setItem(SECHI_SUPERSCRIPT_FIX_KEY, "complete");
+    }
+
     saveArticles();
   }
 
@@ -175,7 +209,7 @@
     let body = String(contents || "").replace(/\r\n?/g, "\n");
     const frontMatter = body.match(/^---\n[\s\S]*?\n---\n?/);
     if (frontMatter) body = body.slice(frontMatter[0].length);
-    return stripTitleHeading(body, title);
+    return editorSuperscriptSyntax(stripTitleHeading(body, title));
   }
 
   function comparableArticle(article) {
@@ -426,6 +460,7 @@
     const data = state();
     const article = currentArticle();
     const title = data.title.trim() || "Untitled article";
+    const body = publishedSuperscriptSyntax(data.body.trim());
     const slug = slugify(data.slug || title) || "untitled-article";
     const permalink = article?.publishedUrl || `/${slug}/`;
     const frontMatter = [
@@ -439,7 +474,7 @@
       `# ${title}`,
       ""
     ];
-    return `${frontMatter.join("\n")}\n${data.body.trim()}\n`;
+    return `${frontMatter.join("\n")}\n${body}\n`;
   }
 
   function localDate() {

@@ -53,10 +53,12 @@ It is still so surreal to recall that interview. The investigating officer told 
 The interview was not at all combative. The officer simply asked me to repeat the same story I'd given before as he typed out my answers. He asked some background about how long I'd owned the boat, where I'd been and what happened on the voyage from Tonga. He asked why I didn't go back to Vava'u, and I gave the safety based answer, which I'd given to Tongan officials and in the pre-arrival notification email. I essentially told my true account of the situation for the 4th or 5th time that week.
 
 After the interview was done, I asked the investigating officer 'off the record': what would happen next? He said it was up to his bosses to decide if they would charge me and the fine would be $12,000FJD ($5,500USD). The original customs officer, sat at his desk next to us, couldn't believe it, he asked the investigating officer:
-> Sēchi*, did you say $12,000?
+> Sēchi<sup>*</sup>, did you say $12,000?
 
 The investigating officer angrily shushed him.
-* Get out of here! Strong negation/disbelief. (find source)
+
+<sup>*</sup> *Get out of here!* Strong negation/disbelief. (find source)
+{: .article-note}
 
 I then had to wait for the rest of the day to hear back from Customs. If the $1,000TOP ($400USD) was stretching my meagre funds, $12,000FJD ($5,500USD) was an unthinkable amount of money.
 

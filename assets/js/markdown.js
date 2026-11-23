@@ -8,7 +8,11 @@
   }
 
   function inlineMarkdown(value) {
-    let output = escapeHtml(value);
+    const escapedAsterisk = "\uE000";
+    const superscriptAsterisk = "\uE001";
+    let output = escapeHtml(String(value || "")
+      .replace(/\^\\?\*\^|<sup>\s*\^?\\?\*\^?\s*<\/sup>/gi, superscriptAsterisk)
+      .replace(/\\\*/g, escapedAsterisk));
     output = output.replace(/`([^`]+)`/g, "<code>$1</code>");
     output = output.replace(/!\[([^\]]*)\]\((https?:\/\/[^\s)]+|\/[^\s)]+)\)/g, '<img src="$2" alt="$1">');
     output = output.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+|\/[^\s)]+)\)/g, '<a href="$2">$1</a>');
@@ -16,6 +20,8 @@
     output = output.replace(/__([^_]+)__/g, "<strong>$1</strong>");
     output = output.replace(/(^|[^*])\*([^*\n]+)\*/g, "$1<em>$2</em>");
     output = output.replace(/(^|[^_])_([^_\n]+)_/g, "$1<em>$2</em>");
+    output = output.replaceAll(escapedAsterisk, "&#42;");
+    output = output.replaceAll(superscriptAsterisk, "<sup>&#42;</sup>");
     return output;
   }
 
@@ -28,9 +34,10 @@
     let code = [];
     let inCode = false;
 
-    const flushParagraph = () => {
+    const flushParagraph = (className = "") => {
       if (paragraph.length) {
-        html.push(`<p>${inlineMarkdown(paragraph.join(" "))}</p>`);
+        const classAttribute = className ? ` class="${className}"` : "";
+        html.push(`<p${classAttribute}>${inlineMarkdown(paragraph.join(" "))}</p>`);
         paragraph = [];
       }
     };
@@ -71,8 +78,11 @@
       const unordered = line.match(/^\s*[-*+]\s+(.+)$/);
       const ordered = line.match(/^\s*\d+[.)]\s+(.+)$/);
       const blockquote = line.match(/^>\s?(.*)$/);
+      const blockClass = line.match(/^\{:\s+\.([a-z][a-z0-9-]*)\s*\}$/i);
 
-      if (heading) {
+      if (blockClass && paragraph.length) {
+        flushParagraph(blockClass[1]);
+      } else if (heading) {
         flushParagraph();
         closeList();
         flushQuote();

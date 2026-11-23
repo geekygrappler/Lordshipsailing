@@ -711,6 +711,14 @@ a:focus-visible {
   color: var(--muted);
 }
 
+.preview .article-note {
+  margin-top: -0.5rem;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
 .preview hr {
   margin-block: 2.75rem;
   border: 0;
