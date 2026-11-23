@@ -11,7 +11,7 @@
     const escapedAsterisk = "\uE000";
     const superscriptAsterisk = "\uE001";
     let output = escapeHtml(String(value || "")
-      .replace(/\^\\?\*\^|<sup>\s*\^?\\?\*\^?\s*<\/sup>/gi, superscriptAsterisk)
+      .replace(/\^\\?\*\^|<sup>\s*(?:\^?\\?\*\^?|&#(?:42|x2a);|&ast;)\s*<\/sup>/gi, superscriptAsterisk)
       .replace(/\\\*/g, escapedAsterisk));
     output = output.replace(/`([^`]+)`/g, "<code>$1</code>");
     output = output.replace(/!\[([^\]]*)\]\((https?:\/\/[^\s)]+|\/[^\s)]+)\)/g, '<img src="$2" alt="$1">');

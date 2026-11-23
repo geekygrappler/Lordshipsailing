@@ -84,13 +84,13 @@
 
   function editorSuperscriptSyntax(value) {
     return String(value || "").replace(
-      /<sup>\s*\^?\\?\*\^?\s*<\/sup>/gi,
+      /<sup>\s*(?:\^?\\?\*\^?|&#(?:42|x2a);|&ast;)\s*<\/sup>/gi,
       "^*^"
     );
   }
 
   function publishedSuperscriptSyntax(value) {
-    return String(value || "").replace(/\^\\?\*\^/g, "<sup>*</sup>");
+    return String(value || "").replace(/\^\\?\*\^/g, "<sup>&#42;</sup>");
   }
 
   function normalizeSechiNote(value) {
