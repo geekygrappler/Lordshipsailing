@@ -446,11 +446,37 @@ a:focus-visible {
   font-weight: 650;
 }
 
+.article-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.8rem;
+}
+
 .live-link {
   color: var(--accent);
   font-size: 0.72rem;
   font-weight: 650;
   text-decoration: none;
+}
+
+.live-link[aria-disabled="true"] {
+  color: var(--faint);
+  cursor: default;
+  pointer-events: none;
+}
+
+.publish-button {
+  min-height: 2.15rem;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.72rem;
+}
+
+.publish-button:disabled {
+  border-color: var(--line);
+  background: var(--soft-line);
+  color: var(--faint);
+  cursor: default;
 }
 
 .field-label {
@@ -853,6 +879,17 @@ a:focus-visible {
 
   .post-details {
     padding-top: 2.25rem;
+  }
+
+  .status-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .article-actions {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
   }
 
   .title-input {

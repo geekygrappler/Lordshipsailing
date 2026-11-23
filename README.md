@@ -23,9 +23,11 @@ The page supports standard Markdown, including headings, links, lists, quotes, i
 
 ### Browser editor
 
-Open `/admin/` on the published site for the article dashboard and distraction-free Markdown editor. It supports multiple drafts, draft/published filters, browser spellcheck, formatting buttons, automatic list continuation, live preview, Markdown import, and Jekyll-ready Markdown export.
+Open `/admin/` on the published site for the article dashboard and distraction-free Markdown editor. It supports multiple drafts, draft/published filters, browser spellcheck, formatting buttons, automatic list continuation, a dedicated latest-draft preview, Markdown import, and Jekyll-ready Markdown export.
 
 Drafts and dashboard metadata are stored only in the current browser on this computer—there is no hosted database. Export important drafts as a backup. To publish an exported post, add the `.md` file to `_posts/` and push it to `main`.
+
+The editor compares each autosaved draft with the Markdown currently published by GitHub Pages. Preview and publish actions are enabled only while they differ. Publishing from the editor requires a fine-grained GitHub token scoped to this repository with **Contents: Read and write** permission. The token is retained only in the open tab and is sent only to `api.github.com`.
 
 ## Customize it
 

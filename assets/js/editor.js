@@ -4,6 +4,9 @@
   const STORAGE_KEY = "lordship-articles-v1";
   const LEGACY_KEY = "lordship-editor-draft-v1";
   const QUOTE_FIX_KEY = "lordship-neverending-quote-fix-v1";
+  const PUBLISHED_DATA_URL = "/admin/published.json";
+  const GITHUB_REPOSITORY = "geekygrappler/Lordshipsailing";
+  const GITHUB_BRANCH = "main";
   const PUBLISHED_ARTICLES = [
     {
       id: "published-customs-case",
@@ -24,6 +27,7 @@
       body: "",
       status: "published",
       publishedUrl: "/the-neverending-journey/",
+      sourcePath: "_posts/2026-11-09-the-neverending-journey.md",
       publishedAt: "2026-11-09T00:00:00+12:00",
       updatedAt: "2026-11-09T00:00:00+12:00"
     }
@@ -45,20 +49,22 @@
   const wordCount = document.querySelector("#word-count");
   const saveState = document.querySelector("#save-state");
   const toast = document.querySelector("#toast");
-  const liveLink = document.querySelector("#live-link");
+  const previewLink = document.querySelector("#preview-link");
+  const publishedLink = document.querySelector("#published-link");
+  const publishButton = document.querySelector("#publish-update");
   const deleteButton = document.querySelector("#delete-post");
+  const { escapeHtml, render: renderMarkdown } = window.LordshipMarkdown;
   let articles = [];
+  let locallyStoredIds = new Set();
+  let publishedById = new Map();
   let currentId = null;
   let activeFilter = "all";
   let slugWasEdited = false;
+  let publishedDataReady = false;
+  let publishing = false;
+  let githubToken = "";
   let saveTimer;
   let toastTimer;
-
-  function escapeHtml(value) {
-    const node = document.createElement("div");
-    node.textContent = value || "";
-    return node.innerHTML;
-  }
 
   function slugify(value) {
     return value
@@ -75,115 +81,6 @@
     return window.crypto?.randomUUID?.() || `article-${Date.now()}-${Math.random().toString(16).slice(2)}`;
   }
 
-  function inlineMarkdown(value) {
-    let output = escapeHtml(value);
-    output = output.replace(/`([^`]+)`/g, "<code>$1</code>");
-    output = output.replace(/!\[([^\]]*)\]\((https?:\/\/[^\s)]+|\/[^\s)]+)\)/g, '<img src="$2" alt="$1">');
-    output = output.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+|\/[^\s)]+)\)/g, '<a href="$2">$1</a>');
-    output = output.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
-    output = output.replace(/__([^_]+)__/g, "<strong>$1</strong>");
-    output = output.replace(/(^|[^*])\*([^*\n]+)\*/g, "$1<em>$2</em>");
-    output = output.replace(/(^|[^_])_([^_\n]+)_/g, "$1<em>$2</em>");
-    return output;
-  }
-
-  function renderMarkdown(markdown) {
-    const lines = markdown.replace(/\r\n?/g, "\n").split("\n");
-    const html = [];
-    let paragraph = [];
-    let listType = null;
-    let quote = [];
-    let code = [];
-    let inCode = false;
-
-    const flushParagraph = () => {
-      if (paragraph.length) {
-        html.push(`<p>${inlineMarkdown(paragraph.join(" "))}</p>`);
-        paragraph = [];
-      }
-    };
-    const closeList = () => {
-      if (listType) {
-        html.push(`</${listType}>`);
-        listType = null;
-      }
-    };
-    const flushQuote = () => {
-      if (quote.length) {
-        html.push(`<blockquote><p>${inlineMarkdown(quote.join(" "))}</p></blockquote>`);
-        quote = [];
-      }
-    };
-
-    lines.forEach((line) => {
-      if (/^```/.test(line)) {
-        flushParagraph();
-        closeList();
-        flushQuote();
-        if (inCode) {
-          html.push(`<pre><code>${escapeHtml(code.join("\n"))}</code></pre>`);
-          code = [];
-          inCode = false;
-        } else {
-          inCode = true;
-        }
-        return;
-      }
-
-      if (inCode) {
-        code.push(line);
-        return;
-      }
-
-      const heading = line.match(/^(#{1,3})\s+(.+)$/);
-      const unordered = line.match(/^\s*[-*+]\s+(.+)$/);
-      const ordered = line.match(/^\s*\d+[.)]\s+(.+)$/);
-      const blockquote = line.match(/^>\s?(.*)$/);
-
-      if (heading) {
-        flushParagraph();
-        closeList();
-        flushQuote();
-        const level = heading[1].length;
-        html.push(`<h${level}>${inlineMarkdown(heading[2])}</h${level}>`);
-      } else if (/^\s*([-*_])(?:\s*\1){2,}\s*$/.test(line)) {
-        flushParagraph();
-        closeList();
-        flushQuote();
-        html.push("<hr>");
-      } else if (unordered || ordered) {
-        flushParagraph();
-        flushQuote();
-        const nextType = unordered ? "ul" : "ol";
-        if (listType !== nextType) {
-          closeList();
-          listType = nextType;
-          html.push(`<${listType}>`);
-        }
-        html.push(`<li>${inlineMarkdown((unordered || ordered)[1])}</li>`);
-      } else if (blockquote) {
-        flushParagraph();
-        closeList();
-        quote.push(blockquote[1]);
-      } else if (!line.trim()) {
-        flushParagraph();
-        closeList();
-        flushQuote();
-      } else {
-        closeList();
-        flushQuote();
-        paragraph.push(line.trim());
-      }
-    });
-
-    flushParagraph();
-    closeList();
-    flushQuote();
-    if (inCode && code.length) {
-      html.push(`<pre><code>${escapeHtml(code.join("\n"))}</code></pre>`);
-    }
-    return html.join("\n");
-  }
 
   function normalizeArticle(article) {
     return {
@@ -194,6 +91,7 @@
       body: article.body || "",
       status: article.status === "published" ? "published" : "draft",
       publishedUrl: article.publishedUrl || "",
+      sourcePath: article.sourcePath || "",
       publishedAt: article.publishedAt || "",
       createdAt: article.createdAt || article.updatedAt || new Date().toISOString(),
       updatedAt: article.updatedAt || new Date().toISOString()
@@ -204,8 +102,10 @@
     try {
       const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
       articles = Array.isArray(saved) ? saved.map(normalizeArticle) : [];
+      locallyStoredIds = new Set(articles.map((article) => article.id));
     } catch (error) {
       articles = [];
+      locallyStoredIds = new Set();
     }
 
     PUBLISHED_ARTICLES.forEach((published) => {
@@ -213,11 +113,12 @@
         article.slug === published.slug && article.status === "published"
       ));
       if (existing) {
-        Object.assign(existing, published, {
-          body: existing.body || published.body,
-          createdAt: existing.createdAt || published.publishedAt,
-          updatedAt: existing.updatedAt || published.updatedAt
-        });
+        existing.publishedUrl = published.publishedUrl;
+        existing.publishedAt = published.publishedAt;
+        existing.sourcePath = published.sourcePath || existing.sourcePath;
+        existing.status = "published";
+        existing.createdAt = existing.createdAt || published.publishedAt;
+        existing.updatedAt = existing.updatedAt || published.updatedAt;
       } else {
         articles.push(normalizeArticle(published));
       }
@@ -233,6 +134,7 @@
           match.description = legacy.description || match.description;
           match.body = legacy.body || match.body;
           match.updatedAt = legacy.savedAt ? new Date(legacy.savedAt).toISOString() : match.updatedAt;
+          locallyStoredIds.add(match.id);
         } else {
           articles.push(normalizeArticle({
             ...legacy,
@@ -257,6 +159,82 @@
     }
 
     saveArticles();
+  }
+
+  function normalizeComparable(value) {
+    return String(value || "").replace(/\r\n?/g, "\n").trim();
+  }
+
+  function stripTitleHeading(body, title) {
+    const escapedTitle = String(title || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    if (!escapedTitle) return normalizeComparable(body);
+    return normalizeComparable(body).replace(new RegExp(`^#\\s+${escapedTitle}\\s*\\n+`, "i"), "");
+  }
+
+  function comparableArticle(article) {
+    return {
+      title: normalizeComparable(article.title),
+      description: normalizeComparable(article.description),
+      slug: normalizeComparable(article.slug),
+      body: normalizeComparable(article.body)
+    };
+  }
+
+  function hasMeaningfulDraft(data) {
+    return Boolean(data.title || data.description || data.slug || data.body);
+  }
+
+  function hasUnpublishedChanges() {
+    const article = currentArticle();
+    if (!article || !publishedDataReady) return false;
+    const draft = comparableArticle(state());
+    const published = publishedById.get(article.id);
+    if (!published) return hasMeaningfulDraft(draft);
+    return JSON.stringify(draft) !== JSON.stringify(comparableArticle(published));
+  }
+
+  async function loadPublishedArticles() {
+    try {
+      const response = await fetch(`${PUBLISHED_DATA_URL}?v=${Date.now()}`, { cache: "no-store" });
+      if (!response.ok) throw new Error(`Published article data returned ${response.status}`);
+      const data = await response.json();
+      if (!Array.isArray(data.articles)) throw new Error("Published article data is invalid");
+
+      publishedById = new Map();
+      data.articles.forEach((publishedData) => {
+        const published = normalizeArticle({
+          ...publishedData,
+          body: stripTitleHeading(publishedData.body, publishedData.title),
+          status: "published",
+          updatedAt: publishedData.publishedAt
+        });
+        const existing = articles.find((article) => article.id === published.id || article.slug === published.slug);
+        if (existing) {
+          existing.publishedUrl = published.publishedUrl;
+          existing.publishedAt = published.publishedAt;
+          existing.sourcePath = published.sourcePath;
+          existing.status = "published";
+          if (!locallyStoredIds.has(existing.id)) {
+            existing.title = published.title;
+            existing.description = published.description;
+            existing.slug = published.slug;
+            existing.body = published.body;
+          }
+          publishedById.set(existing.id, published);
+        } else {
+          articles.push(published);
+          publishedById.set(published.id, published);
+        }
+      });
+      publishedDataReady = true;
+      saveArticles();
+      renderDashboard();
+      updateEditorMeta();
+    } catch (error) {
+      publishedDataReady = false;
+      updateEditorMeta();
+      console.error(error);
+    }
   }
 
   function saveArticles() {
@@ -327,7 +305,7 @@
           </button>
           <div class="article-card-actions">
             ${hasEditableCopy ? `<button type="button" data-open-id="${escapeHtml(article.id)}">Edit</button>` : ""}
-            ${article.publishedUrl ? `<a href="${escapeHtml(article.publishedUrl)}" target="_blank" rel="noopener">View live ↗</a>` : ""}
+            ${article.publishedUrl ? `<a href="${escapeHtml(article.publishedUrl)}" target="_blank" rel="noopener">View published</a>` : ""}
           </div>
         </article>
       `;
@@ -388,8 +366,14 @@
   function updateEditorMeta() {
     const article = currentArticle();
     if (!article) return;
-    liveLink.hidden = !article.publishedUrl;
-    liveLink.href = article.publishedUrl || "#";
+    const changed = hasUnpublishedChanges();
+    previewLink.href = `/admin/preview.html?id=${encodeURIComponent(article.id)}`;
+    previewLink.setAttribute("aria-disabled", String(!changed));
+    previewLink.tabIndex = changed ? 0 : -1;
+    publishedLink.hidden = !article.publishedUrl;
+    publishedLink.href = article.publishedUrl || "#";
+    publishButton.disabled = !changed || publishing;
+    publishButton.textContent = publishing ? "Publishing…" : (article.publishedUrl ? "Publish update" : "Publish article");
     deleteButton.hidden = article.status !== "draft";
   }
 
@@ -461,6 +445,105 @@
     link.remove();
     URL.revokeObjectURL(url);
     showToast("Markdown exported");
+  }
+
+  function encodePath(path) {
+    return path.split("/").map(encodeURIComponent).join("/");
+  }
+
+  function base64Utf8(value) {
+    const bytes = new TextEncoder().encode(value);
+    let binary = "";
+    bytes.forEach((byte) => { binary += String.fromCharCode(byte); });
+    return window.btoa(binary);
+  }
+
+  async function githubRequest(path, options = {}) {
+    return fetch(`https://api.github.com/repos/${GITHUB_REPOSITORY}${path}`, {
+      ...options,
+      headers: {
+        Accept: "application/vnd.github+json",
+        Authorization: `Bearer ${githubToken}`,
+        "X-GitHub-Api-Version": "2022-11-28",
+        ...(options.headers || {})
+      }
+    });
+  }
+
+  async function publishCurrent() {
+    if (!hasUnpublishedChanges() || publishing) return;
+    window.clearTimeout(saveTimer);
+    saveCurrent();
+    const article = currentArticle();
+    if (!article) return;
+
+    if (!githubToken) {
+      githubToken = window.prompt(
+        "Paste a fine-grained GitHub token with Contents read/write access to geekygrappler/Lordshipsailing. " +
+        "It is kept only in this tab and sent only to api.github.com."
+      )?.trim() || "";
+      if (!githubToken) return;
+    }
+
+    const verb = article.publishedUrl ? "update the published article" : "publish this article";
+    if (!window.confirm(`Ready to ${verb} on lordshipsailing.com?`)) return;
+
+    publishing = true;
+    updateEditorMeta();
+    saveState.textContent = "Publishing to GitHub…";
+
+    try {
+      const slug = slugify(fields.slug.value || fields.title.value) || "untitled-article";
+      const sourcePath = article.sourcePath || `_posts/${localDate()}-${slug}.md`;
+      const contentPath = `/contents/${encodePath(sourcePath)}`;
+      const existingResponse = await githubRequest(`${contentPath}?ref=${encodeURIComponent(GITHUB_BRANCH)}`);
+      let sha;
+      if (existingResponse.ok) {
+        sha = (await existingResponse.json()).sha;
+      } else if (existingResponse.status !== 404) {
+        throw new Error(`GitHub could not read the article (${existingResponse.status})`);
+      }
+
+      const response = await githubRequest(contentPath, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: `${article.publishedUrl ? "Update" : "Publish"} ${fields.title.value.trim() || "article"}`,
+          content: base64Utf8(markdownDocument()),
+          branch: GITHUB_BRANCH,
+          ...(sha ? { sha } : {})
+        })
+      });
+
+      if (!response.ok) {
+        if (response.status === 401 || response.status === 403) githubToken = "";
+        const details = await response.json().catch(() => ({}));
+        throw new Error(details.message || `GitHub rejected the update (${response.status})`);
+      }
+
+      const now = new Date().toISOString();
+      article.status = "published";
+      article.sourcePath = sourcePath;
+      article.publishedUrl = article.publishedUrl || `/${slug}/`;
+      article.publishedAt = now;
+      const published = normalizeArticle({
+        ...article,
+        ...state(),
+        status: "published",
+        publishedAt: now,
+        updatedAt: now
+      });
+      publishedById.set(article.id, published);
+      saveArticles();
+      saveState.textContent = "Published update is deploying";
+      showToast("Update sent — GitHub Pages is deploying it");
+    } catch (error) {
+      saveState.textContent = "Publish failed — draft is still saved";
+      showToast(error.message || "Could not publish the update");
+    } finally {
+      publishing = false;
+      updateEditorMeta();
+    }
   }
 
   function replaceSelection(before, after = before, placeholder = "text") {
@@ -598,6 +681,11 @@
   document.querySelector("#download").addEventListener("click", downloadMarkdown);
   document.querySelector("#show-dashboard").addEventListener("click", showDashboard);
   document.querySelector("#new-post").addEventListener("click", () => createArticle());
+  previewLink.addEventListener("click", () => {
+    window.clearTimeout(saveTimer);
+    saveCurrent();
+  });
+  publishButton.addEventListener("click", publishCurrent);
 
   document.querySelector("#copy-markdown").addEventListener("click", async () => {
     try {
@@ -643,4 +731,5 @@
 
   loadArticles();
   showDashboard();
+  loadPublishedArticles();
 })();

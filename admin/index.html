@@ -68,7 +68,11 @@
                 <option value="published">Published</option>
               </select>
             </div>
-            <a class="live-link" id="live-link" href="#" target="_blank" rel="noopener" hidden>View live article ↗</a>
+            <div class="article-actions">
+              <a class="live-link" id="preview-link" href="#" target="_blank" rel="noopener" aria-disabled="true">Preview latest</a>
+              <a class="live-link" id="published-link" href="#" target="_blank" rel="noopener" hidden>View published</a>
+              <button class="button button-primary publish-button" id="publish-update" type="button" disabled>Publish update</button>
+            </div>
           </div>
 
           <label class="field-label" for="post-title">Article title</label>
@@ -144,6 +148,7 @@
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+    <script src="/assets/js/markdown.js" defer></script>
     <script src="/assets/js/editor.js" defer></script>
   </body>
 </html>
