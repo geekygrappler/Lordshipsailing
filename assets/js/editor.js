@@ -8,6 +8,12 @@
   const PUBLISHED_DATA_URL = "/admin/published.json";
   const GITHUB_REPOSITORY = "geekygrappler/Lordshipsailing";
   const GITHUB_BRANCH = "main";
+  const TOKEN_DB_NAME = "lordship-editor";
+  const TOKEN_DB_VERSION = 1;
+  const TOKEN_STORE_NAME = "secrets";
+  const TOKEN_RECORD_ID = "github-token";
+  const TOKEN_KEY_ID = "github-token-key";
+  const TOKEN_TTL_DAYS = 30;
   const PUBLISHED_ARTICLES = [
     {
       id: "published-customs-case",
@@ -54,6 +60,7 @@
   const publishedLink = document.querySelector("#published-link");
   const publishButton = document.querySelector("#publish-update");
   const deleteButton = document.querySelector("#delete-post");
+  const tokenControlButton = document.querySelector("#github-token-control");
   const { escapeHtml, render: renderMarkdown } = window.LordshipMarkdown;
   let articles = [];
   let locallyStoredIds = new Set();
@@ -64,6 +71,7 @@
   let publishedDataReady = false;
   let publishing = false;
   let githubToken = "";
+  let tokenStored = false;
   let saveTimer;
   let toastTimer;
 
@@ -511,6 +519,124 @@
     return window.btoa(binary);
   }
 
+  function openTokenDatabase() {
+    return new Promise((resolve, reject) => {
+      const request = indexedDB.open(TOKEN_DB_NAME, TOKEN_DB_VERSION);
+      request.addEventListener("upgradeneeded", () => {
+        if (!request.result.objectStoreNames.contains(TOKEN_STORE_NAME)) {
+          request.result.createObjectStore(TOKEN_STORE_NAME, { keyPath: "id" });
+        }
+      });
+      request.addEventListener("success", () => resolve(request.result));
+      request.addEventListener("error", () => reject(request.error));
+    });
+  }
+
+  async function readTokenRecord(id) {
+    const database = await openTokenDatabase();
+    return new Promise((resolve, reject) => {
+      const transaction = database.transaction(TOKEN_STORE_NAME, "readonly");
+      const request = transaction.objectStore(TOKEN_STORE_NAME).get(id);
+      request.addEventListener("success", () => resolve(request.result));
+      request.addEventListener("error", () => reject(request.error));
+      transaction.addEventListener("complete", () => database.close());
+    });
+  }
+
+  async function writeTokenRecord(record) {
+    const database = await openTokenDatabase();
+    return new Promise((resolve, reject) => {
+      const transaction = database.transaction(TOKEN_STORE_NAME, "readwrite");
+      transaction.objectStore(TOKEN_STORE_NAME).put(record);
+      transaction.addEventListener("complete", () => {
+        database.close();
+        resolve();
+      });
+      transaction.addEventListener("error", () => reject(transaction.error));
+    });
+  }
+
+  async function deleteTokenRecord(id) {
+    const database = await openTokenDatabase();
+    return new Promise((resolve, reject) => {
+      const transaction = database.transaction(TOKEN_STORE_NAME, "readwrite");
+      transaction.objectStore(TOKEN_STORE_NAME).delete(id);
+      transaction.addEventListener("complete", () => {
+        database.close();
+        resolve();
+      });
+      transaction.addEventListener("error", () => reject(transaction.error));
+    });
+  }
+
+  async function tokenEncryptionKey() {
+    const savedKey = await readTokenRecord(TOKEN_KEY_ID);
+    if (savedKey?.value) return savedKey.value;
+    const key = await crypto.subtle.generateKey({ name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
+    await writeTokenRecord({ id: TOKEN_KEY_ID, value: key });
+    return key;
+  }
+
+  async function saveGithubToken(token) {
+    const key = await tokenEncryptionKey();
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const encrypted = await crypto.subtle.encrypt(
+      { name: "AES-GCM", iv },
+      key,
+      new TextEncoder().encode(token)
+    );
+    await writeTokenRecord({
+      id: TOKEN_RECORD_ID,
+      iv: Array.from(iv),
+      encrypted: Array.from(new Uint8Array(encrypted)),
+      expiresAt: Date.now() + TOKEN_TTL_DAYS * 24 * 60 * 60 * 1000
+    });
+    tokenStored = true;
+    updateTokenControl();
+  }
+
+  async function loadGithubToken() {
+    try {
+      const record = await readTokenRecord(TOKEN_RECORD_ID);
+      if (!record) return "";
+      if (!record.expiresAt || record.expiresAt <= Date.now()) {
+        await deleteTokenRecord(TOKEN_RECORD_ID);
+        return "";
+      }
+      const key = await tokenEncryptionKey();
+      const decrypted = await crypto.subtle.decrypt(
+        { name: "AES-GCM", iv: new Uint8Array(record.iv) },
+        key,
+        new Uint8Array(record.encrypted)
+      );
+      tokenStored = true;
+      updateTokenControl();
+      return new TextDecoder().decode(decrypted);
+    } catch (error) {
+      await deleteTokenRecord(TOKEN_RECORD_ID).catch(() => {});
+      return "";
+    }
+  }
+
+  async function forgetGithubToken(showMessage = true) {
+    githubToken = "";
+    tokenStored = false;
+    await deleteTokenRecord(TOKEN_RECORD_ID).catch(() => {});
+    updateTokenControl();
+    if (showMessage) showToast("GitHub token forgotten on this browser");
+  }
+
+  function updateTokenControl() {
+    tokenControlButton.textContent = tokenStored ? "Forget GitHub token" : "Remember GitHub token";
+  }
+
+  function requestGithubToken() {
+    return window.prompt(
+      "Paste a fine-grained GitHub token with Contents read/write access to geekygrappler/Lordshipsailing. " +
+      "It will be encrypted in this browser for up to 30 days and sent only to api.github.com when publishing."
+    )?.trim() || "";
+  }
+
   async function githubRequest(path, options = {}) {
     return fetch(`https://api.github.com/repos/${GITHUB_REPOSITORY}${path}`, {
       ...options,
@@ -530,11 +656,9 @@
     const article = currentArticle();
     if (!article) return;
 
+    if (!githubToken) githubToken = await loadGithubToken();
     if (!githubToken) {
-      githubToken = window.prompt(
-        "Paste a fine-grained GitHub token with Contents read/write access to geekygrappler/Lordshipsailing. " +
-        "It is kept only in this tab and sent only to api.github.com."
-      )?.trim() || "";
+      githubToken = requestGithubToken();
       if (!githubToken) return;
     }
 
@@ -569,9 +693,19 @@
       });
 
       if (!response.ok) {
-        if (response.status === 401 || response.status === 403) githubToken = "";
+        if (response.status === 401 || response.status === 403) await forgetGithubToken(false);
         const details = await response.json().catch(() => ({}));
         throw new Error(details.message || `GitHub rejected the update (${response.status})`);
+      }
+
+      let tokenSaved = tokenStored;
+      if (!tokenStored) {
+        try {
+          await saveGithubToken(githubToken);
+          tokenSaved = true;
+        } catch (error) {
+          console.error("The GitHub token could not be saved locally", error);
+        }
       }
 
       const now = new Date().toISOString();
@@ -589,7 +723,9 @@
       publishedById.set(article.id, published);
       saveArticles();
       saveState.textContent = "Published update is deploying";
-      showToast("Update sent — GitHub Pages is deploying it");
+      showToast(tokenSaved
+        ? "Update sent — token saved locally for 30 days"
+        : "Update sent — token could not be saved locally");
     } catch (error) {
       saveState.textContent = "Publish failed — draft is still saved";
       showToast(error.message || "Could not publish the update");
@@ -739,6 +875,22 @@
     saveCurrent();
   });
   publishButton.addEventListener("click", publishCurrent);
+  tokenControlButton.addEventListener("click", async () => {
+    if (tokenStored) {
+      if (!window.confirm("Forget the saved GitHub token on this browser?")) return;
+      await forgetGithubToken();
+      return;
+    }
+    const token = githubToken || requestGithubToken();
+    if (!token) return;
+    try {
+      await saveGithubToken(token);
+      githubToken = token;
+      showToast("GitHub token encrypted locally for up to 30 days");
+    } catch (error) {
+      showToast("This browser could not save the GitHub token");
+    }
+  });
 
   document.querySelector("#copy-markdown").addEventListener("click", async () => {
     try {
@@ -784,5 +936,6 @@
 
   loadArticles();
   showDashboard();
+  loadGithubToken().then((token) => { githubToken = token; });
   loadPublishedArticles();
 })();

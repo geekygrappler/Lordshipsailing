@@ -27,7 +27,7 @@ Open `/admin/` on the published site for the article dashboard and distraction-f
 
 Drafts and dashboard metadata are stored only in the current browser on this computer—there is no hosted database. Export important drafts as a backup. To publish an exported post, add the `.md` file to `_posts/` and push it to `main`.
 
-The editor compares each autosaved draft with the Markdown currently published by GitHub Pages. Preview and publish actions are enabled only while they differ. Publishing from the editor requires a fine-grained GitHub token scoped to this repository with **Contents: Read and write** permission. The token is retained only in the open tab and is sent only to `api.github.com`.
+The editor compares each autosaved draft with the Markdown currently published by GitHub Pages. Preview and publish actions are enabled only while they differ. Publishing from the editor requires a fine-grained GitHub token scoped to this repository with **Contents: Read and write** permission. After a successful publish, the token is encrypted with a non-exportable browser key and retained in IndexedDB for up to 30 days. It is sent only to `api.github.com` and can be removed at any time with **Forget GitHub token**.
 
 ## Customize it
 
