@@ -424,18 +424,22 @@
 
   function markdownDocument() {
     const data = state();
+    const article = currentArticle();
     const title = data.title.trim() || "Untitled article";
+    const slug = slugify(data.slug || title) || "untitled-article";
+    const permalink = article?.publishedUrl || `/${slug}/`;
     const frontMatter = [
       "---",
       "layout: default",
       `title: ${yamlString(title)}`,
       `description: ${yamlString(data.description.trim())}`,
+      `permalink: ${yamlString(permalink)}`,
       "---",
       "",
       `# ${title}`,
       ""
     ];
-    return `${frontMatter.join("\n")}${data.body.trim()}\n`;
+    return `${frontMatter.join("\n")}\n${data.body.trim()}\n`;
   }
 
   function localDate() {
