@@ -2,10 +2,11 @@
 layout: default
 title: "The neverending journey"
 description: ""
-permalink: /the-neverending-journey/
+permalink: "/the-neverending-journey/"
 ---
 
 # The neverending journey
+
 ## A Departure I Wish I could Forget
 I had one more beer at the floating bar in Vava'u Tonga. One last one for the road. Said goodbye to the sailors around me and hopped into my beaten down, Chinese branded 2 person dinghy, the air floor sadly deflated. I fired up my much newer, but of similar origin, 2.5HP two stroke, and pootled across the bay to my home for the last 3 years, Lordship, a 38 foot Westerly Sealord. I was in no rush. I like to start all my off shore passages so that I'm heading away from land around sunset. I have a lot of nervous energy, and I know I will stay up all night keeping a proper watch. My theory is that when I'm napping in the middle of the next day any traffic close to shore, with the appropriate watch, should see me. It hasn't failed me so far. 
 
@@ -57,7 +58,7 @@ After the interview was done, I asked the investigating officer 'off the record'
 
 The investigating officer angrily shushed him.
 
-<sup>&#42;</sup> *Get out of here!* Strong negation/disbelief. (find source)
+<sup>&#42;</sup> Get out of here! Strong negation or disbelief.
 {: .article-note}
 
 I then had to wait for the rest of the day to hear back from Customs. If the $1,000TOP ($400USD) was stretching my meagre funds, $12,000FJD ($5,500USD) was an unthinkable amount of money.
