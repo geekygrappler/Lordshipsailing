@@ -171,6 +171,13 @@
     return normalizeComparable(body).replace(new RegExp(`^#\\s+${escapedTitle}\\s*\\n+`, "i"), "");
   }
 
+  function bodyFromMarkdownDocument(contents, title) {
+    let body = String(contents || "").replace(/\r\n?/g, "\n");
+    const frontMatter = body.match(/^---\n[\s\S]*?\n---\n?/);
+    if (frontMatter) body = body.slice(frontMatter[0].length);
+    return stripTitleHeading(body, title);
+  }
+
   function comparableArticle(article) {
     return {
       title: normalizeComparable(article.title),
@@ -201,10 +208,17 @@
       if (!Array.isArray(data.articles)) throw new Error("Published article data is invalid");
 
       publishedById = new Map();
-      data.articles.forEach((publishedData) => {
+      const publishedSources = await Promise.all(data.articles.map(async (publishedData) => {
+        if (!publishedData.sourcePath) throw new Error("A published article is missing its source path");
+        const sourceUrl = `https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${GITHUB_BRANCH}/${encodePath(publishedData.sourcePath)}`;
+        const sourceResponse = await fetch(`${sourceUrl}?v=${Date.now()}`, { cache: "no-store" });
+        if (!sourceResponse.ok) throw new Error(`Published Markdown returned ${sourceResponse.status}`);
+        return { ...publishedData, body: bodyFromMarkdownDocument(await sourceResponse.text(), publishedData.title) };
+      }));
+
+      publishedSources.forEach((publishedData) => {
         const published = normalizeArticle({
           ...publishedData,
-          body: stripTitleHeading(publishedData.body, publishedData.title),
           status: "published",
           updatedAt: publishedData.publishedAt
         });

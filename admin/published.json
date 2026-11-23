@@ -10,7 +10,6 @@ permalink: /admin/published.json
       "title": {{ post.title | jsonify }},
       "description": {{ post.description | default: "" | jsonify }},
       "slug": {{ post.slug | jsonify }},
-      "body": {{ post.content | jsonify }},
       "publishedUrl": {{ post.url | relative_url | jsonify }},
       "publishedAt": {{ post.date | date_to_xmlschema | jsonify }},
       "sourcePath": {{ post.path | jsonify }}
